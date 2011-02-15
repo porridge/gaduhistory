@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="c64ec913-34cc-48cc-9b6d-7a3c731c90cf" kpf_version="4" name="gaduhistory.kpf">
+<preference-set idref="c64ec913-34cc-48cc-9b6d-7a3c731c90cf">
+  <string id="import_exclude_matches">*.*~;*.bak;*.tmp;CVS;.#*;*.pyo;*.pyc;.svn;*%*;tmp*.html;.DS_Store;*.sql</string>
+  <string id="import_include_matches"></string>
+  <boolean id="import_live">1</boolean>
+  <boolean id="import_recursive">1</boolean>
+  <string id="import_type">useFolders</string>
+  <string id="perlExtraPaths"></string>
+  <string relative="path" id="pythonExtraPaths"></string>
+</preference-set>
+</project>
