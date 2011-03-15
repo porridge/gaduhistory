@@ -76,6 +76,9 @@ class _FileManager(object):
     
     def _gg_history_of(self, number):
         return path.join(self.home, '.gg', 'history', str(number))
+    
+    def _gg_history_sql_of(self, number):
+        return path.join(self.home, '.gg', 'history', str(number) + '.db')
 
     def _ekg2_history_of(self, number):
         return path.join(self.home, '.ekg2', 'logs', self._session,

@@ -20,7 +20,7 @@
 #
 
 from lib.gui import BaseROView
-from lib.cache import SQL
+from lib.cache import SQL_MSG
 import curses
 from lib.gui.text import ROText
 
@@ -31,17 +31,14 @@ class WhoView(BaseROView):
         super( WhoView, self ).__init__(title)
 
     def fill(self):
-        sql = SQL()
-        query = 'select nick from gadu nick where ggnumber=:ggnumber and not nick="" group by nick;'
-        tab = {
-            'ggnumber' : self._user.ggnumber,
-        }
-        ret = sql.execute( query, tab )
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select nick from msg where not nick="" group by nick;'
+        ret = sql.execute( query)
         list = ret.fetchall()
         self._maxlines = 1
         new_list = [ ]
         for obj in list:
-            self._maxlines += 1
+            self._maxlines += 1 + obj[0].count('\n')
             new_list.append( obj[0] )
 
         loop = -1

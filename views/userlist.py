@@ -67,26 +67,26 @@ class UserlistView(MenuView):
         super( UserlistView, self ).__init__(u"Lista użytkowników", bar = bar )
         self._about = self.AboutDialog( 5, 5 )
         self._old = None
-	numbers = []
+        numbers = []
         for obj in Users():
             text = "%10d: %-35s" % ( obj.ggnumber, obj.show )
             self.add_menu_item( text, UserView( obj ) )
-	    numbers.append( obj.ggnumber )
+            numbers.append( obj.ggnumber )
         dir = FileManager._history_dir()
-	dirs = []
-	for number in listdir( dir ):
-	    try:
-	        number = int( number )
-	    except:
-	        # the file is not a GG number, so it's not a history file
-	        continue
-	    if number in numbers:
-	        continue
-	    dirs.append( number )
-	dirs.sort()
-	for number in dirs:
+        dirs = []
+        for number in listdir( dir ):
+            try:
+                number = int( number )
+            except:
+                # the file is not a GG number, so it's not a history file
+                continue
+            if number in numbers:
+                continue
+            dirs.append( number )
+        dirs.sort()
+        for number in dirs:
             text = "%10s: %-35s" % ( number, '' )
-	    self.add_menu_item( text, UserView( obj ) )
+            self.add_menu_item( text, UserView( obj ) )
         self.refresh()
 
     def show_number(self, ggnumber):

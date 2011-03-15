@@ -20,7 +20,7 @@
 #
 
 from lib.gui import MenuView, MenuObject
-from lib.cache import SQL
+from lib.cache import SQL_MSG
 from views.log import LogView
 from lib.gui.text import ROText
 
@@ -31,12 +31,9 @@ class YearsView(MenuView):
         super( YearsView, self ).__init__( title )
 
     def __call__(self):
-        sql = SQL()
-        query = 'select DISTINCT strftime( "%Y", time) from gadu where ggnumber=:ggnumber'
-        tab = {
-            'ggnumber' : self._user.ggnumber,
-        }
-        ret = sql.execute( query, tab )
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select DISTINCT strftime( "%Y", time) from msg;'
+        ret = sql.execute( query )
         self._list = []
         for obj in ret.fetchall():
             year = obj[0]
@@ -55,10 +52,9 @@ class MonthsView(MenuView):
         self._year = year
 
     def __call__(self):
-        sql = SQL()
-        query = 'select DISTINCT strftime( "%Y-%m", time) from gadu where ggnumber=:ggnumber and strftime( "%Y", time)=:year;'
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select DISTINCT strftime( "%Y-%m", time) from msg where strftime( "%Y", time)=:year;'
         tab = {
-            'ggnumber' : self._user.ggnumber,
             'year'      : self._year,
         }
         ret = sql.execute( query, tab )
@@ -77,10 +73,9 @@ class DaysView(MenuView):
         self._time = time
 
     def __call__(self):
-        sql = SQL()
-        query = 'select DISTINCT strftime( "%Y-%m-%d", time) as showtime, count(*) from gadu where ggnumber=:ggnumber and strftime( "%Y-%m", time) = :date group by showtime;'
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select DISTINCT strftime( "%Y-%m-%d", time) as showtime, count(*) from msg where strftime( "%Y-%m", time) = :date group by showtime;'
         tab = {
-            'ggnumber' : self._user.ggnumber,
             'date'      : self._time,
         }
         ret = sql.execute( query, tab )

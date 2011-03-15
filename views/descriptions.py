@@ -20,7 +20,7 @@
 #
 
 from lib.gui import BaseROView
-from lib.cache import SQL
+from lib.cache import SQL_MSG
 import curses
 from lib.gui.text import ROText
 
@@ -31,13 +31,12 @@ class DescriptionsView(BaseROView):
         super( DescriptionsView, self ).__init__(title)
 
     def fill(self):
-        sql = SQL()
-        query = 'select descr,  strftime( "%Y-%m-%d %H:%M:%S", time) showtime from gadu where ggnumber=:ggnumber and not descr="" group by descr order by time;'
-        tab = {
-            'ggnumber' : self._user.ggnumber,
-        }
-        ret = sql.execute( query, tab )
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select descr, strftime( "%Y-%m-%d %H:%M:%S", time) showtime from msg where not descr="" group by descr order by time;'
+        ret = sql.execute( query )
         list = ret.fetchall()
+        print query
+        print list
         self._maxlines = 1
         new_list = [ ]
         for obj in list:

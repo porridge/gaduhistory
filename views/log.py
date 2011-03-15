@@ -20,7 +20,7 @@
 #
 
 from lib.gui import BaseROView
-from lib.cache import SQL
+from lib.cache import SQL_MSG
 import curses
 
 class LogView(BaseROView):
@@ -31,10 +31,9 @@ class LogView(BaseROView):
         super( LogView, self ).__init__(title)
 
     def fill(self):
-        sql = SQL()
-        query = 'select *, strftime( "%H:%M:%S", time) as showtime from gadu where ggnumber=:ggnumber and strftime( "%Y-%m-%d", time)=:time order by time asc;'
+        sql = SQL_MSG(self._user.ggnumber)
+        query = 'select *, strftime( "%H:%M:%S", time) as showtime from msg where strftime( "%Y-%m-%d", time)=:time order by time asc;'
         tab = {
-            'ggnumber' : self._user.ggnumber,
             'time'      : self._time,
         }
         ret = sql.execute( query, tab )
