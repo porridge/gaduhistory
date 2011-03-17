@@ -52,12 +52,6 @@ class LogView(BaseROView):
         ret = sql.execute( query, tab )
         obj = ret.fetchone()
         if obj == None:
-            print query
-            print dir(ret)
-            print date + timedelta(day)
-            
-            import time
-            print time.mktime((date + timedelta(day)).timetuple())
             return False
         while msg == None:
             date += timedelta(day)
@@ -94,12 +88,23 @@ class LogView(BaseROView):
             if self.change_date(1):
                 self.fill()
                 self.go_home()
+    
+    def refresh(self):
+        self.update_percent()
+        super(LogView, self).refresh()
+    
+    def update_percent(self):
+        (maxy,maxx) = self._get_main_size()
+        try:
+            percentage = ( self._up * 100 ) / ( self._maxlines - maxy - 1 )
+        except ZeroDivisionError:
+            percentage = 100
+        self._title_text = u"%10d: %s - %s (%d%%)" % ( self._user.ggnumber, self._user.show, self._time, percentage )
 
     def fill(self):
         if self._main != None:
             self._main.clear()
             self.refresh()
-        self._title_text = u"%10d: %s - %s" % ( self._user.ggnumber, self._user.show, self._time )
 
         sql = SQL_MSG(self._user.ggnumber)
         query = 'select *, strftime( "%H:%M:%S", time) as showtime from msg where strftime( "%Y-%m-%d", time)=:time order by time asc;'
@@ -150,9 +155,9 @@ class LogView(BaseROView):
                 self._main.addstr( loop, 0, line.encode( 'UTF-8' ) )
             except:
                 pass
+        self.update_percent()
     
     def __call__(self):
         self._time = self._base_time
-        self._title_text = u"%10d: %s - %s" % ( self._user.ggnumber, self._user.show, self._time )
         return super(LogView, self).__call__()
         
