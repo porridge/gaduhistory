@@ -134,9 +134,9 @@ def cache_history( number ):
     """
     main_sql = SQL()
     ret = main_sql.execute( 'select seek from cache_info where ggnumber=:ggnumber', {'ggnumber':number} )
-    rows = ret.fetchall()
-    if len(rows) >= 1:
-        offset = rows[0][0]
+    row = ret.fetchone()
+    if row != None:
+        offset = row[0]
     else:
         offset = 0
     
@@ -229,6 +229,7 @@ def cache_history( number ):
     except sqlite3.IntegrityError:
         query = 'update cache_info set seek=:seek where ggnumber=:ggnumber;'
         main_sql.execute( query, tab )
+    main_sql.commit()
     sql.commit()
 
 def is_cache_needed(ggnumber):
