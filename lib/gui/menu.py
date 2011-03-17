@@ -68,14 +68,14 @@ class MenuView(BaseView):
     def text(self, obj):
         """text(self, obj) -> str
         Zamiana tekstu, na tekst "writable".
-		TODO: what does it mean?
+        TODO: what does it mean?
         """
         return obj.name.encode( 'utf-8' )
 
     def getmaxyx(self):
         """getmaxyx(self) -> (int, int)
-		Returns the maximum height and width at the current menu object list
-		state.
+        Returns the maximum height and width at the current menu object list
+        state.
         """
         (maxy,maxx) = get_stdscr().getmaxyx()
         maxy = len( self._list ) + 1
@@ -97,12 +97,12 @@ class MenuView(BaseView):
         Fill the bottom window with data.
         """
         (w_maxy,w_maxx) = self.getmaxyx()
-	(s_maxy,s_maxx) = get_stdscr().getmaxyx()
+        (s_maxy,s_maxx) = get_stdscr().getmaxyx()
         if w_maxy >= s_maxy:
             maxy = w_maxy
-	else:
-	    maxy = s_maxy
-	maxx = s_maxx
+        else:
+            maxy = s_maxy
+        maxx = s_maxx
         self._main = curses.newpad( maxy, maxx )
         loop = -1
         for obj in self._list:
@@ -137,7 +137,7 @@ class MenuView(BaseView):
 
     def go_up(self):
         """go_up(self) -> None
-		Move the cursor one position up.
+        Move the cursor one position up.
         """
         self._number -= 1
         if self._number < 0:
@@ -191,7 +191,7 @@ class MenuView(BaseView):
 
     def run_item(self):
         """run_item(self) -> None
-		Call the object currently selected with the cursor.
+        Call the object currently selected with the cursor.
         """
         self.clear()
         if len( self._list ) <= self._number:

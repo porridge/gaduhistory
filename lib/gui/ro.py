@@ -73,7 +73,7 @@ class BaseROView(BaseView):
 
     def go_end(self):
         """go_end(self) -> None
-		Scroll the view to the bottom.
+        Scroll the view to the bottom.
         """
         (maxy,maxx) = self._get_main_size()
         self._up = self._maxlines - maxy - 1

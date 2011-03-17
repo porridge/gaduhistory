@@ -35,6 +35,7 @@ class BaseView(object):
             self._bar = curses.newwin( lines, maxx, maxy - lines , 0 )
         #-----------------------------
         self._title_text = title
+        self._title = None
         self.title = title
         self._main = None
         bar_init()
@@ -48,6 +49,8 @@ class BaseView(object):
         if title == None:
             self._title = None
         else:
+            if self._title != None:
+                self._title.clear()
             self._title = curses.newwin( 1, maxx, 0, 0 )
             title = title.strip().encode( 'utf-8' )
             center = ( maxx / 2 ) - ( len(title) / 2 )
