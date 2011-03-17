@@ -167,8 +167,6 @@ def cache_history( number ):
             
             loop += 1
             if row[0] == 'status':
-                
-                
                 tab = {
                     'type'      : row[0],
                     #'ggnumber'  : int( strip_gg( row[1] ) ),
@@ -213,11 +211,11 @@ def cache_history( number ):
                              'line %d from %s, counting from byte %d.' %
                              (str(row), len(row), loop, str(file), offset))
         except UnicodeEncodeError:
-            pass
+            print 'Unicode Encoding Error in %s when reading line %d from %s, couting from byte %d.' % (str(row), loop, str(file), offset)
             #raise ValueError('Unicode Encoding Error in %s when reading line %d from %s, '
             #                 'couting from byte %d.' % (str(row), loop, str(file), offset))
         except ValueError:
-            pass
+            print "Error in line %d: '%s'. Probalby wrong timestamp." % (loop, str(row) )
     from datetime import datetime
     tab = {
         'ggnumber'  : number,
