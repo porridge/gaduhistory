@@ -1,0 +1,17 @@
+Source: gaduhistory
+Section: misc
+Priority: extra
+Maintainer: Marcin Owsiany <porridge@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), python-central, python2.6
+Standards-Version: 3.9.1
+Homepage: http://projects.socek.org/index.php/p/gaduhistory/
+Vcs-Git: git://github.com/porridge/gaduhistory.git
+
+Package: gaduhistory
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python2.6
+Enhances: ekg, ekg2-core
+Description: EKG history viewer
+ This program lets you view Gadu-Gadu chat history of the EKG and EKG2 programs
+ in an ncurses-based text interface. It uses SQLite databases internally for
+ fast access.

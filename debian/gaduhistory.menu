@@ -1,0 +1,2 @@
+?package(gaduhistory):needs="text" section="Applications/Viewers"\
+  title="gaduhistory" command="/usr/bin/gaduhistory"

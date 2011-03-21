@@ -1,0 +1,6 @@
+gaduhistory (0.4+1-1) unstable; urgency=low
+
+  * Initial release (Closes: #618945)
+    - net text utils misc 
+
+ -- Marcin Owsiany <porridge@debian.org>  Sat, 19 Mar 2011 18:35:14 +0000

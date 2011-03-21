@@ -1,0 +1,47 @@
+.TH GADUHISTORY 1 "March 19, 2011" "gaduhistory" "User Commands"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+gaduhistory \- EKG history viewer
+.SH SYNOPSIS
+.B gaduhistory
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+This program lets you view Gadu-Gadu chat history of the
+.B EKG
+and
+.B EKG2
+programs in an ncurses-based text interface. It uses SQLite databases
+internally for fast access.
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+For a complete description, see the Info files.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Show summary of options.
+.TP
+\fB\-c\fR, \fB\-\-client\fR=\fICLIENT\fR
+Read history from the given client program. Supported values: ekg, ekg2
+.TP
+\fB\-s\fR, \fB\-\-session\fR=\fISESSION\fR
+Session identifier for clients which require one. Example: gg:123456
+.SH SEE ALSO
+.BR ekg (1),
+.BR ekg2 (1).
+.SH AUTHOR
+gaduhistory was written by Dominik "Socek" Długajczyk <msocek@gmail.com>
+.PP
+This manual page was written by Marcin Owsiany <porridge@debian.org>,
+for the Debian project (and may be used by others).

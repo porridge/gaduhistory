@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+%:
+	dh $@ --with python-central
+
+override_dh_auto_build:
+	dh_auto_build
+	( cat debian/gaduhistory.head ; tail -n +3 gaduhistory.py ) > gaduhistory
+
+override_dh_auto_clean:
+	find lib views -name \*.pyc -print0 | xargs -r0 rm -f
+	find lib views -name \*.pyo -print0 | xargs -r0 rm -f
+	rm -f *.pyc *.pyo gaduhistory
+	dh_auto_clean
