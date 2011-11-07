@@ -23,6 +23,7 @@ from lib.gui import BaseROView
 from lib.cache import SQL_MSG
 from datetime import datetime, timedelta
 import curses
+from lib.gui.locals import encode_string
 
 class LogView(BaseROView):
     def __init__(self, user, time):
@@ -152,7 +153,7 @@ class LogView(BaseROView):
         for line in lines:
             try:
                 loop += 1
-                self._main.addstr( loop, 0, line.encode( 'UTF-8' ) )
+                self._main.addstr( loop, 0, encode_string(line) )
             except:
                 pass
         self.update_percent()

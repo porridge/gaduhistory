@@ -23,6 +23,7 @@ from lib.gui import BaseROView
 from lib.cache import SQL_MSG
 import curses
 from lib.gui.text import ROText
+from lib.gui.locals import encode_string
 
 class WhoView(BaseROView):
     def __init__(self, user):
@@ -45,7 +46,7 @@ class WhoView(BaseROView):
         self._main = curses.newpad( self._maxlines, 255 )
         for obj in new_list:
             loop += 1
-            self._main.addstr( loop, 0, obj.strip().encode( 'UTF-8' ) )
+            self._main.addstr( loop, 0, encode_string(obj.strip()) )
         if loop == -1:
             return False
         else:

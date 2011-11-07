@@ -28,6 +28,7 @@ from lib.files import FileManager
 from lib.application import app
 import curses
 from os import listdir
+from lib.gui.locals import encode_string
 
 class UserlistView(MenuView):
     class AboutDialog(object):
@@ -54,7 +55,7 @@ class UserlistView(MenuView):
         def show(self):
             self._win.border()
             for loop in range( len( self._text ) ):
-                self._win.addstr( loop + 1, 1, self._text[loop].encode( 'UTF-8') )
+                self._win.addstr( loop + 1, 1, encode_string(self._text[loop]) )
             self._win.refresh()
 
         def hide(self):

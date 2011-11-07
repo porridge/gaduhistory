@@ -32,7 +32,7 @@ import curses
 class AppClass(object):
     def __init__(self):
         self._stdscr = None
-        self._version = 0.4
+        self._version = 0.5
 
     def init(self):
         """init(self) -> None

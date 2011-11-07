@@ -23,6 +23,7 @@ from lib.gui import BaseROView
 from lib.cache import SQL_MSG
 import curses
 from lib.gui.text import ROText
+from lib.gui.locals import encode_string
 
 class DescriptionsView(BaseROView):
     def __init__(self, user):
@@ -35,8 +36,6 @@ class DescriptionsView(BaseROView):
         query = 'select descr, strftime( "%Y-%m-%d %H:%M:%S", time) showtime from msg where not descr="" group by descr order by time;'
         ret = sql.execute( query )
         list = ret.fetchall()
-        print query
-        print list
         self._maxlines = 1
         new_list = [ ]
         for obj in list:
@@ -47,7 +46,7 @@ class DescriptionsView(BaseROView):
         self._main = curses.newpad( self._maxlines, 255 )
         for obj in new_list:
             loop += 1
-            self._main.addstr( loop, 0, obj.strip().encode( 'UTF-8' ) )
+            self._main.addstr( loop, 0, encode_string(obj.strip()) )
         if loop == -1:
             return False
         else:
