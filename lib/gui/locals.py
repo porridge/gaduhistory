@@ -20,6 +20,11 @@
 #
 import locale
 
+def get_encoding():
+    return locale.getdefaultlocale()[1]
+
 def encode_string(text):
-    encoding = locale.getdefaultlocale()[1]
-    return text.encode( encoding )
+    return text.encode(get_encoding())
+
+def create_unicode(text):
+    return unicode(text, get_encoding())
