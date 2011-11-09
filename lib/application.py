@@ -24,6 +24,7 @@ locale.setlocale(locale.LC_ALL,"")
 
 from lib.cache import cache_history, create_tables, cache_userlist
 from lib.user import Users
+from lib.ekgconfig import EKG_CONFIG
 
 from lib import gui
 
@@ -33,6 +34,7 @@ class AppClass(object):
     def __init__(self):
         self._stdscr = None
         self._version = 0.5
+        EKG_CONFIG.read()
 
     def init(self):
         """init(self) -> None

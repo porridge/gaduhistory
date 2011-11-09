@@ -19,8 +19,10 @@
 #Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 import sqlite3
+import time
 from lib.ggcsv import UnicodeReader, userlist_dialect, GaduReader
 from lib.files import FileManager
+from lib.ekgconfig import EKG_CONFIG
 
 _SQL = None
 _SQL_MSG = {}
@@ -132,6 +134,13 @@ def cache_history( number ):
     Update cache for the specific user.
     number - GG number of the person to reloads cache
     """
+    def create_time(text):
+        if EKG_CONFIG.get('log_timestamp') != None:
+            time_struct = time.strptime(text, EKG_CONFIG.get('log_timestamp'))
+            return time.mktime(time_struct)
+        else:
+            return int(text)
+        
     main_sql = SQL()
     ret = main_sql.execute( 'select seek from cache_info where ggnumber=:ggnumber', {'ggnumber':number} )
     row = ret.fetchone()
@@ -155,10 +164,10 @@ def cache_history( number ):
             tab = {}
             if row[0] in ['chatsend', 'msgsend']:
                 tab['msg']  = row[4]
-                tab['time'] = row[3]
+                tab['time'] = create_time(row[3])
             else:    
                 tab['msg']  = row[5]
-                tab['time'] = row[4]
+                tab['time'] = create_time(row[4])
             ret = sql.execute(query,tab)
             rows = ret.fetchall()
             if len(rows) > 0:
@@ -172,7 +181,7 @@ def cache_history( number ):
                     #'ggnumber'  : int( strip_gg( row[1] ) ),
                     'nick'      : row[2],
                     'ip'        : row[3],
-                    'time'      : int( row[4] ),
+                    'time'      : create_time( row[4] ),
                     'status'    : row[5],
                 }
                 if len( row ) > 6:
@@ -186,8 +195,8 @@ def cache_history( number ):
                     'type'      : row[0],
                     #'ggnumber'  : int( strip_gg( row[1] ) ),
                     'nick'      : row[2],
-                    'time'      : int( row[3] ),
-                    'send_time' : int( row[4] ),
+                    'time'      : create_time( row[3] ),
+                    'send_time' : create_time( row[4] ),
                     'msg'       : row[5],
                 }
                 query = '''insert into msg( type, nick, time, send_time, msg ) values
@@ -197,7 +206,7 @@ def cache_history( number ):
                     'type'      : row[0],
                     #'ggnumber'  : int( strip_gg( row[1] ) ),
                     'nick'      : row[2],
-                    'time'      : int( row[3] ),
+                    'time'      : create_time( row[3] ),
                     'msg'       : row[4],
                 }
                 query = '''insert into msg( type, nick, time, msg ) values
