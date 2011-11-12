@@ -1,3 +1,11 @@
+gaduhistory (0.5-1) unstable; urgency=low
+
+  * New upstream release.
+    - fixes non-utf8 locale support (Closes: #647638)
+    - fixes custom timestamp support
+
+ -- Marcin Owsiany <porridge@debian.org>  Sat, 12 Nov 2011 13:50:37 +0000
+
 gaduhistory (0.4+1-1) unstable; urgency=low
 
   * Initial release (Closes: #618945)
