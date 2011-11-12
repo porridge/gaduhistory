@@ -20,6 +20,7 @@
 #
 
 import csv, codecs, cStringIO
+from lib.gui.locals import encode_string, create_unicode
 
 class ekg_dialect(csv.Dialect):
     """dialect of the file with history of ekg."""
@@ -52,7 +53,7 @@ class UTF8Recoder:
         return self
 
     def next(self):
-        return self.reader.next().encode("utf-8")
+        return encode_string(self.reader.next())
 
 class UnicodeReader:
     """
@@ -66,7 +67,7 @@ class UnicodeReader:
 
     def next(self):
         row = self.reader.next()
-        return [unicode(s, "utf-8") for s in row]
+        return [create_unicode(text) for text in row]
 
     def __iter__(self):
         return self
@@ -86,7 +87,7 @@ class GaduReader(object):
         for char in line:
             if char == self.dialect.escapechar:
                 if last_char == self.dialect.escapechar:
-		     last_str += self.dialect.escapechar
+                    last_str += self.dialect.escapechar
             elif last_char == self.dialect.escapechar:
                 if char == 'n':
                     last_str += "\n"
@@ -111,7 +112,7 @@ class GaduReader(object):
                     last_str += char
             last_char = char
         row.append( last_str )
-        return [unicode(s, "utf-8") for s in row]
+        return [create_unicode(text) for text in row]
 
     def __iter__(self):
         return self

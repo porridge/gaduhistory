@@ -21,6 +21,7 @@
 import curses
 from main import Colors, get_stdscr
 from lib.gui.text import ROText
+from lib.gui.locals import encode_string
 
 class BaseView(object):
     """Base view."""
@@ -52,7 +53,7 @@ class BaseView(object):
             if self._title != None:
                 self._title.clear()
             self._title = curses.newwin( 1, maxx, 0, 0 )
-            title = title.strip().encode( 'utf-8' )
+            title = encode_string(title.strip())
             center = ( maxx / 2 ) - ( len(title) / 2 )
             flags = curses.color_pair(Colors.title )
             self._title.bkgd( ' ', flags )

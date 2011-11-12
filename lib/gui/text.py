@@ -20,6 +20,7 @@
 #
 import curses
 from copy import copy
+from lib.gui.locals import encode_string
 
 ESCAPES = [ '\xc5', '\xc4', '\xc3' ]
 
@@ -53,7 +54,7 @@ class Text(object):
             width = self._win.getmaxyx()[1] - 2 # TODO: I don't know why it needs to be "-2" but it does not work otherwise
 
             center = ( width/2 ) - ( len(self._title)/2 ) + 1
-            self._win.addstr( 0, center, self._title.encode( 'UTF-8' ), gflags )
+            self._win.addstr( 0, center, encode_string(self._title), gflags )
         self._win.refresh()
         self._win2 = curses.newwin( 1, width, self.y+1, self.x+1)
 
@@ -210,11 +211,11 @@ class ROText(object):
         swidth = self._win.getmaxyx()[1] - 2 # TODO: I don't know why it needs to be "-2" but it does not work otherwise
         if self._title:
             center = ( swidth/2 ) - ( len(self._title)/2 ) + 1
-            self._win.addstr( 0, center, self._title.encode( 'utf-8' ), gflags )
+            self._win.addstr( 0, center, encode_string(self._title), gflags )
         self._win.refresh()
         self._win2 = curses.newpad( 1, swidth + 1)
         try:
-            self._win2.addstr( 0, 0, self.text.encode( 'UTF-8' ), curses.A_BOLD )
+            self._win2.addstr( 0, 0, encode_string(self.text), curses.A_BOLD )
         except curses.error, er:
             raise RuntimeError( self.text )
         self._win2.refresh( 0, 0, self._y+1, self._x+1,  self._y+2, self._x+swidth)

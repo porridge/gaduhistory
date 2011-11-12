@@ -22,6 +22,7 @@ from time import sleep
 from main import Colors, get_stdscr, BARS
 from base import BaseView
 import curses
+from lib.gui.locals import encode_string
 
 class MenuObject(object):
     """An object within a menu.
@@ -70,7 +71,7 @@ class MenuView(BaseView):
         Zamiana tekstu, na tekst "writable".
         TODO: what does it mean?
         """
-        return obj.name.encode( 'utf-8' )
+        return encode_string(obj.name)
 
     def getmaxyx(self):
         """getmaxyx(self) -> (int, int)
