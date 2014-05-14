@@ -1,1 +1,3 @@
-# Upstream website does not contain meaningful hrefs that uscan could use.
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/gaduhistory-$1\.tar\.gz/ \
+  https://github.com/socek/Gadu-History/tags .*/v?(\d\S*)\.tar\.gz

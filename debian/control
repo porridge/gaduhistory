@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Marcin Owsiany <porridge@debian.org>
 Build-Depends: debhelper (>= 7.0.50~), python-central, python
 Standards-Version: 3.9.2
-Homepage: http://projects.socek.org/index.php/p/gaduhistory/
+Homepage: https://github.com/socek/Gadu-History
 Vcs-Git: git://github.com/porridge/gaduhistory.git
 
 Package: gaduhistory
