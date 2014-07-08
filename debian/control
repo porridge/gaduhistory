@@ -1,7 +1,7 @@
 Source: gaduhistory
 Section: misc
 Priority: extra
-Maintainer: Marcin Owsiany <porridge@debian.org>
+Maintainer: Debian QA Group <packages@qa.debian.org>
 Build-Depends: debhelper (>= 7.0.50~), python (>= 2.6.6-3~)
 Standards-Version: 3.9.5
 Homepage: https://github.com/socek/Gadu-History

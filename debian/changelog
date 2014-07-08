@@ -1,3 +1,9 @@
+gaduhistory (0.5-4) unstable; urgency=low
+
+  * Orphaning.
+
+ -- Marcin Owsiany <porridge@debian.org>  Tue, 08 Jul 2014 07:35:16 +0200
+
 gaduhistory (0.5-3) unstable; urgency=low
 
   [ Andrea Colangelo ]
