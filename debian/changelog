@@ -1,3 +1,9 @@
+gaduhistory (0.5-5) UNRELEASED; urgency=medium
+
+  * Use secure URI in Vcs control header.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Fri, 14 Sep 2018 01:30:54 +0100
+
 gaduhistory (0.5-4) unstable; urgency=low
 
   * Orphaning.
